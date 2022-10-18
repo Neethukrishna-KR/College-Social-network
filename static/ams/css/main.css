@@ -1,0 +1,30 @@
+body
+{
+    font-family: 'Lora', serif;
+}
+#car
+{
+    margin-top: 0em;
+}
+.carousel-item{
+    height: 600px;
+} 
+.carousel-item img{
+    height: 600px;
+}
+table
+{
+    text-align: center;
+}
+#th {
+    background-color:#9109e0;
+    color: white;
+  }
+.black-overlay{
+    position: absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+    background: rgba(0,0,0,0.6);
+}

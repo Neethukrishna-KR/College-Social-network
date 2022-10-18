@@ -1,0 +1,69 @@
+{% extends 'ams/base.html' %}
+
+
+{% block title %}
+    <title>Assignment Details</title>
+{% endblock title %}
+    
+{% block content %}
+<div class="jumbotron">
+    <h1>Details</h1>
+    <h2>Assignment name: {{assignment.name}}</h2>
+    <h4>Assignment message: {{assignment.message}}</h4>
+    <h4>Assignment uploaded on:{{assignment.date_uploaded|date:"d-M-Y"}} </h4>
+    <h4>Assignment to be aubmitted on: {{assignment.date_submission|date:"d-M-Y"}}</h4>
+    </div>
+    <hr>
+    
+    {% if user == assignment.uploader %}
+    {% if submit_1 %}
+    <h3>Submissions</h3>
+    <div class="table-responsive">
+    <table class="table" border=3>
+        <tr id="th">
+            <th>Student</th>
+            <th>Email</th>
+            <th>Download</th>
+            <th>Remark</th>
+            <th>Add Remark</th>
+        </tr>
+        
+        {% for sub in submit_1  %}
+        <tr>
+            <td>{{sub.student.first_name}} {{sub.student.last_name}}</td>
+            <td>{{sub.student.email}}</td>
+            <td><a href="{{sub.file.url}}">Download</a></td>
+            <td>{{sub.remark}}</td>
+            <td><a href="{% url 'assignment:teacher_remark' pk=sub.pk %}" class="btn btn-primary">Add</a></td>
+        </tr>
+        {% endfor %}
+    </table>    
+    </div>
+    {% endif %}   
+    {% endif %}
+
+    
+    {% if submit_2 %}
+    
+    {% if user == submit_2.student %}
+    
+    <h3>Your Submission</h3>
+    <p>File:<a href="{{submit_2.file.url}}">Download</a></p>
+    <p>Remark:{{submit_2.remark}}</p>
+    <a href="{% url 'assignment:edit_file' pk=submit_2.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'assignment:delete_file' pk=submit_2.pk %}" class="btn btn-danger">Delete</a>
+        
+    {% endif %}
+    {% endif %}
+    
+    {% if not submit_2 and user != assignment.uploader %}
+    <a href="{% url 'assignment:upload_submission' pk=assignment.pk %}" class="btn btn-success">Upload Submission</a>    
+    {% endif %}
+        
+        
+    
+    
+        
+        
+
+{% endblock %}  

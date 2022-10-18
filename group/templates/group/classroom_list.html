@@ -1,0 +1,30 @@
+{% extends 'ams/base.html' %}
+
+
+{% block title %}
+    
+{% endblock title %}
+
+
+{% block content %}
+
+<h2>Classrooms</h2>
+<hr>
+{% for clroom in class1  %}
+<a href="{% url 'group:classroom_details' pk=clroom.pk %}">{{clroom.name}}({{clroom.sub_code}})</a>  
+<hr>  
+{% endfor %}
+
+{% for clroom in class2  %}
+<a href="{% url 'group:classroom_details' pk=clroom.classroom.pk %}">{{clroom.classroom.name}}({{clroom.classroom.sub_code}})</a> 
+<hr>   
+{% endfor %}
+
+    
+
+
+
+
+{% endblock content %}
+    
+    

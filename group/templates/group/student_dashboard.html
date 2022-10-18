@@ -1,0 +1,37 @@
+{% extends 'ams/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Student Dashboard</title>
+{% endblock title %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="card mr-5" style="width: 18rem;">
+            <img src="{% static 'ams/img/articlea.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Add Articles</h5>
+              <p class="card-text">Post Articles</p>
+              <a href="{% url 'group:classroom_list' %}" class="btn btn-primary">Post</a>
+            </div>
+          </div>
+          <div class="card mr-5" style="width: 18rem;">
+            <img src="{% static 'ams/img/eventa.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">View Articles and Events</h5>
+              <p class="card-text">View Articles and Common Events</p>
+              <a href="{% url 'group:join_classroom' %}" class="btn btn-primary">View</a>
+            </div>
+          </div>
+          <div class="card mr-5" style="width: 18rem;">
+            <img src="{% static 'ams/img/departmenta.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Department Lists</h5>
+              <p class="card-text">View Department-wise Newses</p>
+              <a href="{% url 'group:join_classroom' %}" class="btn btn-primary">View</a>
+            </div>
+          </div>
+    </div>
+{% endblock content %}
+    

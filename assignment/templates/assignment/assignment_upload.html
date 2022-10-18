@@ -1,0 +1,19 @@
+{% extends 'ams/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    <title>Upload Assignment</title>
+{% endblock title %}
+
+
+{% block content %}
+    <legend>Upload Assignment</legend><hr>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{a_form|crispy}}
+    <input type="submit" class="btn btn-success" value="Upload">
+    </form>
+{% endblock content %}
+    
+    

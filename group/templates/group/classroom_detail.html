@@ -1,0 +1,86 @@
+{% extends 'ams/base.html' %}
+
+
+{% block title %}
+    <title>Classroom Details</title>
+{% endblock title %}
+    
+{% block content %}
+
+    <div class="jumbotron">
+    <h1>Article Details</h1>
+    <h2>Post: {{classroom.name}}</h2>
+    <h4>Post Type: {{classroom.sub_code}}</h4>
+    <h4>Post Type {{classroom.code}}</h4>
+    <h4>Post Owner: {{classroom.admin.first_name}} {{classroom.admin.last_name}}</h4>
+
+
+
+    
+    {% if user == classroom.admin %}
+        <a href="{% url 'group:delete_classroom' pk=classroom.pk %}" class="btn btn-danger">Delete Post</a>
+        <a href="{% url 'group:update_classroom' pk=classroom.pk %}" class="btn btn-warning">Update Post</a>
+        <a href="{% url 'assignment:upload' pk=classroom.pk %}" class="btn btn-success">Upload Post</a>
+    {% endif %}
+    
+    {% if not user == classroom.admin %}
+    <a href="{% url 'group:leave_classroom' pk=classroom.pk %}" class="btn btn-danger">Leave Classroom</a>    
+    {% endif %}
+    </div>
+    <br>
+    <hr>
+    <h3>ARTICLES</h3>
+    
+    {% if assignments %}
+    
+    {% if user == classroom.admin %}
+    <div class="table-responsive">
+    <table class="table" border=3>
+        <tr id="th">
+            <th>Name</th>
+            <th>Date of upload</th>
+            <th>Download</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for assignment in assignments  %}
+        <tr>
+            <td><a href="{% url 'assignment:assignment_details' pk=assignment.pk %}">{{assignment.name}}</a></td>
+            <td>{{assignment.date_uploaded|date:"d-M-Y"}}</td>
+            <td>{{assignment.date_submission|date:"d-M-Y"}}</td>
+            <td><a href="{{assignment.file.url}}" target="_blank">Download</a></td>
+            <td><a class="btn btn-primary" href="{% url 'assignment:assignment_edit' pk=assignment.pk %}">Edit</a></td>
+            <td><a class="btn btn-danger" href="{% url 'assignment:assignment_delete' pk=assignment.pk %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+        
+    {% endif %}
+    
+    
+    {% if user != classroom.admin %}
+    <table border=1>
+        <tr>
+            <th>Name</th>
+            <th>Date of upload</th>
+            <th>Download</th>
+        </tr>
+        {% for assignment in assignments  %}
+        <tr>
+            <td><a href="{% url 'assignment:assignment_details' pk=assignment.pk %}">{{assignment.name}}</a></td>
+            <td>{{assignment.date_uploaded|date:"d-M-Y"}}</td>
+            <td>{{assignment.date_submission|date:"d-M-Y"}}</td>
+            <td><a href="{{assignment.file.url}}" target="_blank">Download</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+        
+    {% endif %}
+    
+        
+    {% endif %}
+        
+        
+{% endblock content %}
+    

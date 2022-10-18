@@ -1,0 +1,16 @@
+{% extends 'ams/base.html' %}
+
+
+{% block title %}
+<title>Confirm Delete</title>    
+{% endblock title %}
+
+
+{% block content %}
+    <h3>Do you want to delete {{classroom.name}}</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a href="{% url 'group:classroom_details' pk=classroom.pk %}">Cancel</a>
+    </form>
+{% endblock content %}
